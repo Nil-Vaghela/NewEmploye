@@ -1,0 +1,22 @@
+# systemd service that keeps the app running under Gunicorn.
+# Install: sudo cp deploy/gsucfa.service /etc/systemd/system/gsucfa.service
+# Then:    sudo systemctl daemon-reload && sudo systemctl enable --now gsucfa
+
+[Unit]
+Description=GSU Chick-fil-A Attendance (Gunicorn)
+After=network.target
+
+[Service]
+User=gsucfa
+Group=gsucfa
+WorkingDirectory=/home/gsucfa/GSU-Employe-Attendance-old-state
+EnvironmentFile=/home/gsucfa/GSU-Employe-Attendance-old-state/.env
+ExecStart=/home/gsucfa/GSU-Employe-Attendance-old-state/venv/bin/gunicorn \
+    --workers 3 \
+    --bind unix:/home/gsucfa/GSU-Employe-Attendance-old-state/gsucfa.sock \
+    app:app
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

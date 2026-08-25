@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+
+    .points-0 { width: 0%; }
+    .points-1 { width: 10%; }
+    .points-2 { width: 20%; }
+    .points-3 { width: 30%; }
+    .points-4 { width: 40%; }
+    .points-5 { width: 50%; }
+    .points-6 { width: 60%; }
+    .points-7 { width: 70%; }
+    .points-8 { width: 80%; }
+    .points-9 { width: 90%; }
+    .points-10 { width: 100%; }
+
+      
+    html, body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+        font-family: 'Roboto', Arial, sans-serif;
+        color: #333;
+        font-size: 12px;
+    }
+    .container-fluid {
+        max-width: 1100px;
+        margin: auto;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .row {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .col-12, .col-md-6 {
+        box-sizing: border-box;
+        padding: 10px;
+    }
+    .card {
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+    }
+    .card-header {
+        background-color: #D70F26;
+        color: white;
+        padding: 10px;
+        font-size: 16px;
+    }
+    .card-body {
+        background-color: white;
+        padding: 10px;
+        font-size: 14px;
+    }
+    .progress {
+        height: 20px;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 10px;
+    }
+    .btn {
+        background-color: #D70F26;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        margin: 5px;
+        border-radius: 10px;
+        transition: background-color 0.3s;
+        font-size: 14px;
+    }
+    .btn:hover {
+        background-color: #b90c1c;
+    }
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-gap: 10px;
+        width: 100%;
+    }
+
+    </style>
+    
+    <title>View Employe Data - {{ filename }}</title>
+    <!-- Add CSS for Chick-fil-A theme -->
+</head>
+<body>
+
+    <div class="container-fluid py-3">
+        <div class="row">
+            <div class="col-12 text-center py-4">
+                <h4>Hello, {{ username}} Welcome to Chick-fil-A</h4>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Rating Progress</h2>
+                    </div>
+                    <div class="card-body">
+                        {% set color = 'success' if rating >= 80 else 'warning' if rating >= 60 else 'danger' %}
+                        <div class="progress">
+                            <div class="progress-bar bg-{{ color }}" role="progressbar" style="width: {{ rating }}%" aria-valuenow="{{ rating }}" aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                        </div>
+                        <p>Rating: {{ rating }}/100</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Points Progress</h2>
+                    </div>
+                    <div class="card-body">
+                        {% set color = 'success' if user_points == 0 else 'success' if user_points <= 3 else 'warning' if user_points <= 6 else 'danger' %}
+                        {% set reverse_points = 10 - user_points %}
+                        <div class="progress">
+                            <div class="progress-bar bg-{{ color }} points-{{ reverse_points }}" role="progressbar" aria-valuenow="{{ reverse_points }}" aria-valuemin="0" aria-valuemax="10">
+                            </div>
+                        </div>
+                        <p>User Points: {{ user_points }}</p>
+                    </div>
+                    
+                </div>
+                
+               
+                
+            </div>
+            <div class="flex-row">
+                <a href="{{ url_for('leave_request') }}" class="btn btn-primary btn-spacing">Leave Request</a>
+                <a href="{{ url_for('Feedback') }}" class="btn btn-primary btn-spacing">Feedback</a>
+                <a href="{{ url_for('rate_students', username=username) }}" class="btn btn-primary btn-spacing">Rate Student</a>
+                <a href="{{ url_for('leaderboard') }}" class="btn btn-primary btn-spacing">Leaderboard</a>
+
+            </div>
+        </div>
+        <div class="grid-container mt-5">
+            {% for file, data in user_data.items() %}
+                <div class="card">
+                    <div class="card-header">
+                        <h2>{{ file }}</h2>
+                    </div>
+                    <div class="card-body">
+                        {% for row in data %}
+                            <p><strong>Name:</strong> {{ row.Name }}</p>
+                            <p><strong>Clock In:</strong> {{ row['Clock In'] }}</p>
+                            <p><strong>Lunch Start:</strong> {{ row['Lunch Start'] }}</p>
+                            <p><strong>Lunch End:</strong> {{ row['Lunch End'] }}</p>
+                            <p><strong>Clock Out:</strong> {{ row['Clock Out'] }}</p>
+                            <p><strong>Total Working Hours:</strong> {{ row['Total Working Hours'] }}</p>
+                            <hr>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <p class="text-center note-text"></p>
+        <p class="text-center note-text">Made By Nil ❤️</p>
+    </body>
+    </html>

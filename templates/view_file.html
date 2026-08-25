@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html, body {
+            min-height: 100vh;
+        }
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Roboto', Arial, sans-serif;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 70px;
+            padding-top: 20px;
+        }
+        .container {
+            max-width: 700px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header img {
+            width: 200px;
+            margin-bottom: 15px;
+        }
+        .header h1 {
+            font-size: 30px;
+            font-weight: bold;
+            color: #D70F26;
+        }
+        .form-container {
+            margin-bottom: 30px;
+        }
+        .form-group label {
+            font-weight: bold;
+            color: #333;
+        }
+        .btn-primary {
+            background-color: #D70F26;
+            border-color: #D70F26;
+        }
+        .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+            background-color: #b90c1c;
+            border-color: #b90c1c;
+        }
+        .table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table-container th,
+.table-container td {
+    padding: 12px 15px;
+    border: none; /* added this line */
+}
+
+.table-container th {
+    background-color: #D70F26;
+    color: #ffffff;
+    text-align: left;
+}
+
+.table-container tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.table-container tr:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+}
+        .note-text {
+            color: #D70F26;
+        }
+    </style>
+    
+    <title>View Employe Data - {{ filename }}</title>
+    <!-- Add CSS for Chick-fil-A theme -->
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>{{ filename }}</h1>
+        </div>
+        <div class="table-container">
+            {{ data|safe }}
+        </div>
+        <div>
+            <a href="{{ url_for('edit_file', filename=filename) }}" class="btn btn-primary">Edit</a>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">Back to file list</a>
+        </div>
+    </div>
+</body>
+</html>

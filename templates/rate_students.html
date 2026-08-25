@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Assigned Students</title>
+    <style>
+        .bg-theme {
+            background-color: #D70F26;
+        }
+        .btn-theme {
+            background-color: #D70F26;
+            border-color: #D70F26;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-4">
+        <div class="card">
+            <div class="card-header bg-theme text-white">Assigned Students</div>
+           
+
+            <div class="card-body">
+                 <!-- Back Button -->
+<a href="{{ url_for('edit_points', user_id=sesstionUser) }}" class="btn btn-theme btn-sm mb-4">Back</a>
+                {% if error %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                {% else %}
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for student in students %}
+                                <tr>
+                                    <td>{{ student['Name'] }}</td>
+                                    <td>
+                                        <a href="{{ url_for('rate_student_form', user_id=student['User ID']) }}" class="btn btn-theme btn-sm">Rate</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

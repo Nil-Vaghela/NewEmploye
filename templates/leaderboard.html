@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f5f8;
+            padding: 30px;
+        }
+
+        .container {
+            border-radius: 5px;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header img {
+            width: 200px;
+            border-radius: 100px;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            color: #D70F26;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background-color: #D70F26;
+            border-color: #D70F26;
+        }
+
+        .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+            background-color: #b90c1c;
+            border-color: #b90c1c;
+        }
+
+        .table-container table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 1.2em;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .table-container th, .table-container td {
+            border: none;
+            padding: 12px 15px;
+        }
+
+        .table-container th {
+            background-color: #D70F26;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        .table-container tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .table-container tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .table-container tr:hover {
+            background-color: #f1f5f8;
+            transform: scale(1.02);
+            transition: transform 0.3s ease;
+        }
+
+        .note-text {
+            text-align: center;
+            color: #D70F26;
+            font-size: 16px;
+        }
+
+        .btn-spacing {
+            margin: 10px;
+        }
+
+        .form-container {
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .table-container td:first-child {
+            font-size: 1.0em;
+            font-weight: bold;
+            color: #000000;
+        }
+        .table-container tr.green-background td {
+            background-color: #38b73e88;
+            color: #000000;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://commkit.gsu.edu/files/2019/06/PrimaryLogo3color-768x594.jpg" alt="GSU Logo">
+            <h1>Leaderboard</h1>
+        </div>
+        <div class="table-container">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for employee in employees %}
+                    <tr {% if loop.index == 1 %}class="green-background"{% endif %}>
+                        <td>
+                            {% if loop.index == 1 %}
+                                👑 {{ employee.Name }}
+                            {% else %}
+                                {{ employee.Name }}
+                            {% endif %}
+                        </td>
+                        <td>{{ employee.Rating }}/100</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+       
+        <p class="note-text">Made By Nil ❤️</p>
+    </div>
+
+    <script>
+        // Disable the back button
+        history.pushState(null, document.title, location.href);
+        window.addEventListener('popstate', function (event) {
+            history.pushState(null, document.title, location.href);
+        });
+
+        function confirmAction() {
+            var action = document.getElementById("action").value;
+            return confirm("Are you sure you want to " + action + "?");
+        }
+    </script>
+</body>
+</html>

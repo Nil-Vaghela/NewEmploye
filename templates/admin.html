@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <!-- Add CSS for Chick-fil-A theme -->
+    <style>
+        html, body {
+            min-height: 100vh;
+        }
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Roboto', Arial, sans-serif;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 70px;
+            padding-top: 20px;
+        }
+        .container {
+            max-width: 700px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header img {
+            width: 200px;
+            margin-bottom: 15px;
+        }
+        .header h1 {
+            font-size: 30px;
+            font-weight: bold;
+            color: #D70F26;
+        }
+        .form-container {
+            margin-bottom: 30px;
+        }
+        .form-group label {
+            font-weight: bold;
+            color: #333;
+        }
+        .btn-primary {
+            background-color: #D70F26;
+            border-color: #D70F26;
+        }
+        .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+            background-color: #b90c1c;
+            border-color: #b90c1c;
+        }
+        .table-container h2 {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            color: #D70F26;
+            margin-bottom: 20px;
+        }
+        .table-container table {
+            color: #333;
+        }
+        .table-container th, .table-container td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        .table-container th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        .note-text {
+            color: #D70F26;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        <div class="table-container">
+            <h2>Admin Dashboard</h2>
+            <a href="{{ url_for('add_user') }}" class="btn btn-primary">Add User</a>
+            <a href="{{ url_for('users_list_view') }}" class="btn btn-primary">Employee</a>
+            <a href="{{ url_for('assign_students') }}" class="btn btn-primary">Assign Student Lead</a>
+            
+            <h2>List of Excel Files:</h2>
+            <div class="row">
+                {% for file in files %}
+                    <div class="col-md-4 col-sm-6 col-xs-12 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <i class="fas fa-file-excel fa-3x mb-3" style="color: #1c7430;"></i>
+                                <h5 class="card-title">{{ file }}</h5>
+                                <a href="{{ url_for('view_file', filename=file) }}" class="btn btn-primary">View</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

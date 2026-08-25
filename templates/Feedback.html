@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html, body {
+            min-height: 100vh;
+        }
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Roboto', Arial, sans-serif;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 70px;
+            padding-top: 20px;
+        }
+        .container {
+            max-width: 700px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header img {
+            width: 200px;
+            margin-bottom: 15px;
+        }
+        .header h1 {
+            font-size: 30px;
+            font-weight: bold;
+            color: #D70F26;
+        }
+        .form-container {
+            margin-bottom: 30px;
+        }
+        .form-group label {
+            font-weight: bold;
+            color: #333;
+        }
+        .btn-primary {
+            background-color: #D70F26;
+            border-color: #D70F26;
+        }
+        .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+            background-color: #b90c1c;
+            border-color: #b90c1c;
+        }
+        .table-container h2 {
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            color: #D70F26;
+            margin-bottom: 20px;
+        }
+        .table-container table {
+            color: #333;
+        }
+        .table-container th, .table-container td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        .table-container th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        .note-text {
+            color: #D70F26;
+        }
+    </style>
+    
+    <title>View Employe Data - {{ filename }}</title>
+    <!-- Add CSS for Chick-fil-A theme -->
+</head>
+<body>
+    <div class="container">
+        <h2>Give Us Your Feedback</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form action="{{ url_for('Feedback') }}" method="POST">
+            <div class="form-group">
+              <label for="name">Name (Optional):</label>
+              <input type="text" class="form-control" id="name" name="name">
+            </div>
+            <div class="form-group">
+              <label for="email">Email (Optional):</label>
+              <input type="email" class="form-control" id="email" name="email">
+            </div>
+            <div class="form-group">
+              <label for="phone_number">Phone Number (Optional):</label>
+              <input type="text" class="form-control" id="phone_number" name="phone_number">
+            </div>
+            <div class="form-group">
+              <label for="feedback">Feedback:</label>
+              <textarea class="form-control" id="feedback" name="feedback" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="rating">Rating</label>
+                <select class="form-control" id="rating" name="rating" required>
+                    <option value="">Select</option>
+                    <option value="1">1 Star</option>
+                    <option value="2">2 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="5">5 Stars</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

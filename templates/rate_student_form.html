@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Rate Student</title>
+    <style>
+        .bg-theme {
+            background-color: #D70F26;
+        }
+        .btn-theme {
+            background-color: #D70F26;
+            border-color: #D70F26;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-4">
+        <div class="card">
+            <div class="card-header bg-theme text-white">Rate Student</div>
+            <div class="card-body">
+                <form method="POST" action="/rate_students" class="form-container">
+                    <!-- Questions for rating -->
+                    <input type="hidden" name="user_id" value="{{ user_id }}">
+                    
+                    {% set questions = [" How effectively does the employee collaborate with team members to ensure smooth operations?",
+                     "How consistently does the employee adhere to Chick-fil-A's policies, including dress code, food safety, and customer interaction guidelines? ",
+                     "How would you rate the employee's ability to provide exceptional customer service that aligns with Chick-fil-A's standards?", 
+                     "How well does the employee respond to direction and guidance from leadership?", 
+                     "How efficiently does the employee complete their assigned tasks, particularly during busy periods?", 
+                     "How effectively does the employee handle unexpected problems or challenges in their role?", 
+                     "How proactive is the employee in identifying and taking on additional responsibilities or helping others without being asked? ", 
+                     "How well does the employee communicate with both team members and customers? ", 
+                     "How well does the employee adapt to changing circumstances, such as unexpected rushes, staff shortages, or new procedures?", 
+                     "Considering all aspects of the employee's role, how would you rate their overall contribution to the team's success?"] %}
+                    {% for i in range(10) %}
+                        <div class="form-group">
+                            <label for="q{{i+1}}">{{ questions[i] }}:</label>
+                            <select id="q{{i+1}}" name="q{{i+1}}" class="form-control">
+                                <option value="">Please select</option>
+                                {% for i in range(10, -1, -1) %}
+                                    <option value="{{i * 0.5}}">{{i * 0.5}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    {% endfor %}
+                    <input type="submit" value="Submit Rating" class="btn btn-theme">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

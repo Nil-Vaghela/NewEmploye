@@ -93,3 +93,10 @@ Version 3.0.4
       added gunicorn as the production WSGI server, and added deploy/
       (systemd service + Nginx config) plus DEPLOY.md with the full
       step-by-step runbook. See DEPLOY.md for how to actually go live.
+
+Version 3.0.5
+    - Bumped pandas (1.5.3 -> 2.2.2) and numpy (1.24.2 -> 1.26.4) in
+      requirements.txt. The old pins have no prebuilt install for Python
+      3.12 (Ubuntu 24.04's default), so a fresh `pip install` on the
+      DigitalOcean droplet tried to compile them from source and failed.
+      Verified nothing in the app depends on pandas 1.x-only behavior.

@@ -7,8 +7,8 @@ Jinja2==3.1.2
 click==8.1.3
 
 # Data / Excel handling
-pandas==1.5.3
-numpy==1.24.2
+pandas==2.2.2
+numpy==1.26.4
 openpyxl==3.1.2
 
 # Used by app.py for US/Eastern timestamps (was missing before - app could not even start without it)
